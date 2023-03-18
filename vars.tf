@@ -1,2 +1,2 @@
 variable "env" {}
-varible "vpc_cidr" {}
+variable "vpc_cidr" {}
