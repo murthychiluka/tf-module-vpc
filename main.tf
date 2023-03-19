@@ -16,7 +16,15 @@ resource "aws_subnet" "public_subnets" {
     { Name = "${var.env}-${each.value["name"]}" }
   )
 }
+#Internet Gateway
+resource "aws_internet_gateway" "igw" {
+  vpc_id = aws_vpc.main.id
 
+  tags = merge(
+    var.tags,
+    { Name = "${var.env}-igw" }
+  )
+}
 # public route table
 resource "aws_route_table" "public-route-table" {
   vpc_id = aws_vpc.main.id
@@ -48,7 +56,6 @@ resource "aws_subnet" "private_subnets" {
     { Name = "${var.env}-${each.value["name"]}" }
   )
 }
-
 
 # private route table
 resource "aws_route_table" "private-route-table" {
