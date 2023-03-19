@@ -63,6 +63,12 @@ resource "aws_route_table" "public-route-table" {
     gateway_id = aws_internet_gateway.igw.id
   }
 
+  route {
+    cidr_block                = " data.aws_vpc.default_vpc.cidr_block"
+    vpc_peering_connection_id = aws_vpc_peering_connection.peer.id
+  }
+
+
   for_each = var.public_subnets
   tags = merge(
     var.tags,
